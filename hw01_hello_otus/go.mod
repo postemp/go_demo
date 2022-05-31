@@ -1,4 +1,4 @@
-module github.com/postemp/hw01_hello_otus
+module github.com/postemp/go_demo/hw01_hello_otus
 
 go 1.16
 

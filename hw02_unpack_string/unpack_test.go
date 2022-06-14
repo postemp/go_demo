@@ -2,6 +2,7 @@ package hw02unpackstring
 
 import (
 	"errors"
+	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -18,7 +19,7 @@ func TestUnpack(t *testing.T) {
 		{input: "aaa0b", expected: "aab"},
 		{input: "qwe4", expected: "qweeee"},
 		{input: "qw\n2e", expected: "qw\n\ne"},
-		{input: "\n2", expected: "\n\n"},
+		{input: "аи\n2", expected: "аи\n\n"},
 		// uncomment if task with asterisk completed
 		{input: `e\33`, expected: `e333`},
 		{input: `qwe\4\5`, expected: `qwe45`},
@@ -43,6 +44,7 @@ func TestUnpackInvalidString(t *testing.T) {
 		tc := tc
 		t.Run(tc, func(t *testing.T) {
 			_, err := Unpack(tc)
+			fmt.Println(err)
 			require.Truef(t, errors.Is(err, ErrInvalidString), "actual error %q", err)
 		})
 	}

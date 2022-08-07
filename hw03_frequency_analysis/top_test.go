@@ -94,22 +94,22 @@ func TestTop10(t *testing.T) {
 	// don't forget to make an additional test
 	t.Run("additional test", func(t *testing.T) {
 		expected := []string{
-			"он",         
-			"бы",        
-			"и",         
-			"как",        
-			"ему",       
-			"с",         
+			"он",
+			"бы",
+			"и",
+			"как",
+			"ему",
+			"с",
 			"45",
-			"бум-бум-бум",       
-			"бумкать",      
-			"было", 
+			"бум-бум-бум",
+			"бумкать",
+			"было",
 		}
 		require.Equal(t, expected, Top10(spoiledText))
 	})
 	t.Run("additional test2", func(t *testing.T) {
 		expected := []string{
-			"asd",       
+			"asd",
 		}
 		require.Equal(t, expected, Top10("  .$%. ..^%^...asd"))
 	})

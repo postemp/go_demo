@@ -9,6 +9,16 @@ import (
 // Change to true if needed.
 var taskWithAsteriskIsCompleted = true
 
+var spoiledText = `Как *видите, ./%ОН^& #спускается  по  лестнице  вслед  за  своим
+	другом #$%#45  Кристофером#   Робином,   головой   вниз,  пересчитывая
+	ступеньки собственным затылком:  бум-бум-бум.  Другого  способа
+	сходить  с  лестницы  он  пока  не  знает.  Иногда ему, правда,
+		кажется, что можно бы найти какой-то другой способ, если бы  он
+	только   мог   на  минутку  перестать  бумкать  и  как  следует
+	сосредоточиться. Но увы - сосредоточиться-то ему и некогда.
+		Как БЫ то ни было, вот он уже спустился  и  готов  с  вами
+	познакомиться.`
+
 var text = `Как видите, он  спускается  по  лестнице  вслед  за  своим
 	другом   Кристофером   Робином,   головой   вниз,  пересчитывая
 	ступеньки собственным затылком:  бум-бум-бум.  Другого  способа
@@ -47,6 +57,9 @@ func TestTop10(t *testing.T) {
 	t.Run("no words in empty string", func(t *testing.T) {
 		require.Len(t, Top10(""), 0)
 	})
+	t.Run("no words in a bad string with whitespaces", func(t *testing.T) {
+		require.Len(t, Top10("$%# #$... $^$%^"), 0)
+	})
 	t.Run("positive test", func(t *testing.T) {
 		if taskWithAsteriskIsCompleted {
 			expected := []string{
@@ -77,5 +90,27 @@ func TestTop10(t *testing.T) {
 			}
 			require.Equal(t, expected, Top10(text))
 		}
+	})
+	// don't forget to make an additional test
+	t.Run("additional test", func(t *testing.T) {
+		expected := []string{
+			"он",         
+			"бы",        
+			"и",         
+			"как",        
+			"ему",       
+			"с",         
+			"45",
+			"бум-бум-бум",       
+			"бумкать",      
+			"было", 
+		}
+		require.Equal(t, expected, Top10(spoiledText))
+	})
+	t.Run("additional test2", func(t *testing.T) {
+		expected := []string{
+			"asd",       
+		}
+		require.Equal(t, expected, Top10("  .$%. ..^%^...asd"))
 	})
 }
